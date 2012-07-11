@@ -74,7 +74,7 @@
             authToken = [[operation.response allHeaderFields] objectForKey:@"X-Auth-Token"];
             storageURL = [[operation.response allHeaderFields] objectForKey:@"X-Storage-Url"];
             cdnManagementURL = [[operation.response allHeaderFields] objectForKey:@"X-CDN-Management-Url"];
-            @"
+            
             [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"AFRackspaceAuthTokenExpiryKey"];
             [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:@"AFRackspaceAuthTokenKey"];
             [[NSUserDefaults standardUserDefaults] setObject:storageURL forKey:@"AFRackspaceStorageURLKey"];
@@ -99,9 +99,9 @@
     }
     else {
         
-        authToken = [[NSUserDefaults standardUserDefaults] objectForKey:RDRackspaceAuthTokenKey];
-        storageURL = [[NSUserDefaults standardUserDefaults] objectForKey:RDRackspaceStorageURLKey];
-        cdnManagementURL = [[NSUserDefaults standardUserDefaults] objectForKey:RDRackspaceCDNManagementURLKey];
+        authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AFRackspaceAuthTokenKey"];
+        storageURL = [[NSUserDefaults standardUserDefaults] objectForKey:@"AFRackspaceStorageURLKey"];
+        cdnManagementURL = [[NSUserDefaults standardUserDefaults] objectForKey:@"AFRackspaceCDNManagementURLKey"];
         
         if([delegate respondsToSelector:@selector(AFCloudFilesClientAuthenticationSucceeded:)]) {
             
@@ -110,7 +110,7 @@
     }
 }
 
--(void)uploadImageToContainer:(NSString *)container withFilename:(NSString *)filename data:(NSData *)data andContentType:(NSString *)contentType {
+-(void)uploadFileToContainer:(NSString *)container withFilename:(NSString *)filename data:(NSData *)data andContentType:(NSString *)contentType {
     
     NSString *urlString = [NSString stringWithFormat:@"%@/%@/%@", storageURL, container, filename];
     NSURL *uploadURLAndPath = [NSURL URLWithString:urlString];

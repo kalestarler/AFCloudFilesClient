@@ -4,6 +4,7 @@
 //  Created by kalestarler on 28/6/12.
 //
 
+#import <UIKit/UIKit.h>
 #import "AFHTTPClient.h"
 #import "AFHTTPRequestOperation.h"
 
@@ -25,7 +26,7 @@
 -(id)initWithUsername:(NSString *)username andKey:(NSString *)apiKey;
 
 -(void)authenticate;
--(void)uploadImageToContainer:(NSString *)container withFilename:(NSString *)filename data:(NSData *)data andContentType:(NSString *)contentType;
+-(void)uploadFileToContainer:(NSString *)container withFilename:(NSString *)filename data:(NSData *)data andContentType:(NSString *)contentType;
 -(void)setProgressBar:(UIProgressView *)appProgressBar;
 
 @end
