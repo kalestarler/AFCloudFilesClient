@@ -11,7 +11,8 @@
 @protocol AFCloudFilesClientDelegate;
 
 @interface AFCloudFilesClient : NSObject {
-
+    
+    BOOL authenticated;
 }
 
 @property(nonatomic, retain) NSString *cfUsername;
@@ -24,18 +25,22 @@
 @property(nonatomic, retain) UIProgressView *progressBar;
 
 -(id)initWithUsername:(NSString *)username andKey:(NSString *)apiKey;
-
 -(void)authenticate;
+
 -(void)uploadFileToContainer:(NSString *)container withFilename:(NSString *)filename data:(NSData *)data andContentType:(NSString *)contentType;
 -(void)setProgressBar:(UIProgressView *)appProgressBar;
+
+-(void)retrieveImageWithFilename:(NSString *)filename fromContainer:(NSString *)container;
 
 @end
 
 @protocol AFCloudFilesClientDelegate <NSObject>
--(void)AFCloudFilesClientAuthenticationSucceeded:(AFCloudFilesClient *)client;
--(void)AFCloudFilesClientAuthenticationFailed:(AFCloudFilesClient *)client;
 @optional
+
 -(void)AFCloudFilesClient:(AFCloudFilesClient *)client withAFHTTPRequestOperation:(AFHTTPRequestOperation *)operation completedUploadWithResponse:(id)responseObject;
 -(void)AFCloudFilesClient:(AFCloudFilesClient *)client withAFHTTPRequestOperation:(AFHTTPRequestOperation *)operation failedUploadWithError:(NSError *)error;
+
+-(void)retrievedImage:(UIImage *)image WithFilename:(NSString *)filename fromContainer:(NSString *)container;
+-(void)AFCloudFilesClient:(AFCloudFilesClient *)client withAFHTTPRequestOperation:(AFHTTPRequestOperation *)operation failedDownloadWithError:(NSError *)error;
 
 @end
